@@ -4,32 +4,36 @@ package com.wj.homework;
  * @author wj
  * @version 1.0
  */
+
+//将字符串中的指定部分进行反转
 public class Homework01 {
     public static void main(String[] args) {
 
-
+        String str = "abcdef";
+        System.out.println("转换前的字符串是："+str);
         try {
-            if(args.length!=2){
-                throw new ArrayIndexOutOfBoundsException("参数个数不对");
-            }
+           str= reverse(str, 1, 4);
 
-            //把接收到的两个参数转化成整数
-            int n1=Integer.parseInt(args[0]);
-            int n2=Integer.parseInt(args[1]);
-
-            double res =cal(n1,n2);
-            System.out.println("计算结果="+res);
-        } catch (ArrayIndexOutOfBoundsException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-        }catch (NumberFormatException e){
-            System.out.println("参数的格式不正确，需要输入整数");
-        }catch (ArithmeticException e){
-            System.out.println("出现了除0的异常");
+            return;
         }
+        System.out.println("转换后的字符串是："+str);
+
+
 
     }
-    public static double cal(int n1, int n2){
-        return n1/n2;
+    public static String reverse(String str ,int start ,int end){
+        if (!(str != null&&start>=0&&end>start&&end<str.length()) ){
+            throw new RuntimeException("输入参数格式有误");
+        }
+        char[] chars =str.toCharArray();
+        for (int i = start,j=end; i < j; i++,j--) {
+            char temp=chars[i];
+            chars[i]=chars[j];
+            chars[j]=temp;
+        }
+        return new String(chars);
+       //return chars.toString();  这个返回的是数组对象的默认字符串表示形式
     }
 }
-
